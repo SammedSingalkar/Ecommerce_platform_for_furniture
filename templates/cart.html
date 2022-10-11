@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="static/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cart</title>
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+  <style>
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #6a11cb;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+
+    .me-2 {
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="/">Home</a></li>
+        <li><a href="/shop">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/cart" class="active"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <a>
+          <div class="dropdown">
+            <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px"
+              height="42px">
+            <div class="dropdown-content">
+              <a href="/dashboard">Your Account</a>
+              <a href="/orders">Your orders</a>
+              <a href="/wishlist">Your Wishlist</a>
+              <a href="/login/logout">Logout</a>
+            </div>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </header>
+
+  <section class="h-100 gradient-custom">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Cart - {{count}} items</h5>
+            </div>
+            {% set vars = {'total_amount': 0} %}
+            <div class="card-body">
+              <!-- Single item -->{% for item in data %}
+              <div class="row">
+                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                  <!-- Image -->
+                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                    <a href="/product_detail{{item.no}}"><img src="static\img\product\srno\{{item.no}}.jpg"
+                        class="w-100" alt="Blue Jeans Jacket" /></a>
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                    </a>
+                  </div>
+                  <!-- Image -->
+                </div>
+
+                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                  <!-- Data -->
+                  <p><strong>{{item.product_name}}</strong></p>
+                  <p>Color: {{item.color}}</p>
+                  <!-- <p>Size: M</p> -->
+                  <form action="/cart" method="post">
+                    <button type="hidden" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                      title="Remove item" name="Remove item" value="{{item.srno}}">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                    <button type="hidden" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                      title="Move to the wish list" name="wishlist" value="{{item.srno}}">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </form>
+                  <!-- Data -->
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                  <!-- Quantity -->
+                  
+                  <form action="/cart" method="post">
+                  <div class="d-flex mb-4" style="max-width: 300px">
+                    <button type="hide" name="srno" value="{{item.srno}}" class="btn btn-primary px-3 me-2" style="height:5vh;"
+                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    &nbsp;&nbsp; 
+                    <div class="form-outline">
+                      <input id="form1" min="1" oninput="cart()" name="quantity" value="{{item.quantity}}" type="number"
+                        class="form-control" />
+                      <label class="form-label" for="form1">Quantity</label>
+                    </div>
+                    &nbsp;&nbsp;
+                    <button type="hide" name="srno" value="{{item.srno}}" class="btn btn-primary px-3 ms-2" style="height:5vh;"
+                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div></form>
+                  <!-- Quantity -->
+
+                  <!-- Price -->
+                  <p class="text-start text-md-center" style="font-size:x-large;">
+                    <strong>₹{{item.quantity | int * item.price}}</strong>
+                  </p>
+                  <!-- Price -->
+                </div>
+              </div>
+              <!-- Single item -->
+
+              {% if vars.update({'total_amount': vars.total_amount + item.price }) %}{% endif %}
+              <hr class="my-4" />
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <p><strong>Expected shipping delivery</strong></p>
+              <p class="mb-0">12.10.2020 - 14.10.2020</p>
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body">
+              <p><strong>We accept</strong></p>
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa" />
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                alt="American Express" />
+              <img class="me-2" width="45px"
+                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard" />
+              <img class="me-2" width="45px" src="static\img\pay\rupay.png" alt="Rupay" />
+              <img class="me-2" width="45px" src="static\img\pay\discover.png" alt="Discover" />
+              <img class="me-2" width="45px" src="static\img\pay\upi.png" alt="UPI" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Summary</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Products
+                  <!-- <span>₹{{ vars.total_amount }}</span> -->
+                  <span>₹{{ total }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span>Free Shipping</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including 10% GST)</p>
+                    </strong>
+                  </div>
+                  <!-- <span><strong>₹{{ vars.total_amount + (vars.total_amount / 10)}}</strong></span> -->
+                  <span><strong>₹{{ total + (total / 10)}}</strong></span>
+                </li>
+              </ul>
+
+             <a href="/product_payment"> <button type="button" class="btn btn-primary btn-lg btn-block">
+                Go to checkout
+              </button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-gray-600 body-font">
+    <div
+        class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                <img src="static/img/logo.png" width="50" height="15" class="logo" alt="logo">
+                </svg>
+                <span class="ml-3 text-xl">Ecommerce Platform</span>
+            </a>
+            <p class="mt-2 text-sm text-gray-500">This is ecommerce platform for furniture. You can cuy quality of
+                furniture here.</p>
+        </div>
+        <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+
+            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Contact</h2>
+                <nav class="list-none mb-10">
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800">
+                            <p><strong>Address:</strong>WIT Boys Hostel, Solpaur</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800">
+                            <p><strong>Phone:</strong>+1111111/+91 4444435</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800">
+                            <p><strong>Hours:</strong>10:00-18:00, Mon-Sat</p>
+                        </a>
+                    </li>
+                </nav>
+            </div>
+
+            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">About</h2>
+                <nav class="list-none mb-10">
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="/about">About us</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="">Delivery Information</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="/contact">Contact Us</a>
+                    </li>
+                </nav>
+            </div>
+
+            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Account</h2>
+                <nav class="list-none mb-10">
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="/login">Sign In</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="/cart">View Cart</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800" href="/wishlist">My Wishlist</a>
+                    </li>
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800">help</a>
+                    </li>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+    <div class="bg-gray-100">
+        <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+            <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 Ecommerce Platform —
+                <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1"
+                    target="_blank">@knyttneve</a>
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+                <a class="text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path
+                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path stroke="none"
+                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                        </path>
+                        <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

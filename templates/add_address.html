@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <meta charset="UTF-8">
+    <link rel = "icon" type = "image/png" href = "static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Address</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+
+    <style>
+      html, body {
+      /* display: flex; */
+      justify-content: center;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 15px;
+      }
+
+      form {
+      border: 5px solid #f1f1f1;
+      }
+
+      input[type=text], input[type=number]{
+      width: 100%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      }
+
+      button {
+      background-color: #8ebf42;
+      color: white;
+      padding: 14px 0;
+      margin: 10px 0;
+      border: none;
+      cursor: grabbing;
+      width: 20%;
+      }
+
+      h1 {
+      text-align:center;
+      fone-size:18;
+      }
+      button:hover {
+      opacity: 0.8;
+      }
+      .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+      }
+      .container {
+      padding: 16px 0;
+      text-align:left;
+      }
+      span.psw {
+      float: right;
+      padding-top: 0;
+      padding-right: 15px;
+      }
+      /* Change styles for span on extra small screens */
+      @media screen and (max-width: 300px) {
+      span.psw {
+      display: block;
+      float: none;
+      }
+    }
+        .pro{
+            display: inline-block;
+        }
+    </style>
+  </head>
+
+  <body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/logout">Sign in</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+<section style="margin-left:30vh; margin-right:30vh;">
+    <form action="/add_address" method="post">
+      <h1>Add Address</h1>
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label for="name"><strong>Username</strong></label>
+        <input type="text" placeholder="Enter Username" name="name" required>
+
+        <label for="mn"><strong>Mobile Number</strong></label>
+        <input type="number" placeholder="Enter Your Mobile Number" name="mn" required>
+
+        <label for="pin"><strong>Pincode</strong></label>
+        <input type="number" placeholder="Enter Your Pincode" name="pin" pattern="[0-9]{6}" maxlength="6" required>
+
+        <label for="state"><strong>State</strong></label>
+        <input type="text" placeholder="Enter Your State" name="state" required>
+
+        <label for="landmark"><strong>Lanmart</strong></label>
+        <input type="text" placeholder="Enter Your landmark" name="landmark" required>
+
+        <label for="city"><strong>City</strong></label>
+        <input type="text" placeholder="Enter Your City" name="city" required>
+        
+        <div class="msg">{{ msg }}</div>
+
+      </div>
+      <center><button type="submit">Submit</button></center>
+      
+    </form>
+</section>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+    <style>
+
+    .outside{
+        margin-left: 25vh;
+        margin-right: 25vh;
+        margin-top: 12vh;
+        /* border: 2px solid black; */
+        height: 50vh;
+    }
+
+    .inside{
+        margin-top: 4vh;
+        margin-left: 6vh;
+        margin-right: 6vh;
+        width:37vh;
+        height: 12vh;
+        border: 1px solid grey;
+        border-radius: 5px;
+        display:inline-block;
+
+    }
+
+    .inside:hover{
+        cursor: pointer;
+    }
+
+    .line{
+        padding: 2vh;
+        display: inline-flex;
+        text-align:center;
+        position: relative;
+    }
+
+    .line h2{
+        margin-top: -2vh;
+  margin-left: 5vh;
+  transform: translate(-40%, -70%);
+    }
+
+    .content h1{
+        font-size:small;
+        transform: translate(30%, -120%);
+    }
+</style>
+</head>
+<body class="bg-white font-family-karla h-screen">
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/login/logout">Log Out</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+       <a href="/orders"> <div class="outside">
+            <div class="inside">
+             <div class="line">
+                <img src="static/img/Your-order.png" height="60px" width="60px" alt="">
+             </div>
+             <div class="line">
+               <h2>Your Orders</h2>     
+        </div>
+        <div class="content">
+            <h1>Track, return, buy things again</h1>   
+        </div>
+            </div></a>
+
+           <a href="/profile"> <div class="inside" >
+                <div class="line">
+                    <img src="static/img/login.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>Login </h2>    
+            </div>
+            <div class="content">
+                <h1>Edit login, name and mobile</h1>   
+            </div>
+            </div></a>
+
+            <a href="/addresses"><div class="inside">
+                <div class="line">
+                    <img src="static/img/location.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>Your Address</h2>        
+            </div>
+            <div class="content">
+                <h1>Edit address for orders and gifts</h1>   
+            </div>
+            </div></a>
+            
+            <a href="/payment_methods"><div class="inside">
+                <div class="line">
+                    <img src="static/img/payment.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>Payment option</h2>      
+            </div>
+            <div class="content">
+                <h1>Edit or add Payment methods</h1>   
+            </div>
+            </div></a>
+
+            <a href="/pricing"><div class="inside">
+                <div class="line">
+                    <img src="static/img/prime.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>prime</h2>     
+            </div>
+            <div class="content">
+                <h1>View your prime benefits</h1>   
+            </div>
+            </div></a>  
+
+            <a href="/contact"><div class="inside">
+                <div class="line">
+                    <img src="static/img/contact.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>Contact Us</h2>
+                     
+            </div>
+            <div class="content">
+                <h1>Contact us</h1>   
+            </div>
+            </div></a>
+        
+        </div>
+    </section>
+    
+</body>
+</html>

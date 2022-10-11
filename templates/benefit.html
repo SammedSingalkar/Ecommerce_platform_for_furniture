@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user Benefits</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+<style>
+    .box{
+        margin: 0;
+        padding: 2vh;
+        border: 1px solid grey;
+        background-color: whitesmoke;
+        display: inline-block;
+        width: 50.2vh;
+        height: 14vh;
+        
+    }
+    .plan{
+        display: inline-block;
+    }
+
+    .content{
+        display: inline-block;
+        margin-top: 2vh;
+        padding: 1vh;
+    }
+
+</style>
+
+</head>
+<body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static/unnamed.webp" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/login/logout">Logout</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div class="box">
+            <center><div class="prime" style="font-family:'Times New Roman'; font-size:larger; font-weight: 600; color: rgb(18, 104, 232);">Prime</div></center>
+            <center><div style="font-size:xx-large">{{data.name}}</div></center>
+        </div>
+
+        <div class="box">
+            <div class="plan" style="font-size:larger; font-weight:600; ">Prime plan</div>
+            <div class="plan" style="background-color:blue; color: white; padding: .3vh; border-radius: 20px; padding-left:3vh; padding-right:3vh;">Best Value</div>
+            <div id="price" style="font-size:xx-large">Annual ₹600</div>
+            
+        </div>
+
+        <div class="box">
+            <div class="mem" style="font-size:larger; font-weight:600;">Membership End Date</div>
+            <div class="date"style="font-size:xx-large">8, August 2022</div>
+        </div>
+
+        <div class="box">
+            <div class="manage"  style="font-size:larger; font-weight:600;">Manage</div>
+            <div class="membership" style="font-size:xx-large">Membership</div>
+        </div>
+    </section>
+
+    <aside>
+        <div class="bar" style="margin:4vh; border:1px solid grey; padding:3vh; height: 60vh; border-radius: 4px;" >
+            <div class="bnf" style="height:4vh; background-color:whitesmoke; width:100%; border-radius: 5px; border:1px solid red; padding-left: 4vh;">Your Prime Benefits</div>
+
+            <div class="container">
+                <div class="content" style="width:20vh;">
+                    <img src="static\img\benefit\free_delivery.jpg" alt="not found" height="55vh" width="55vh">
+                </div>
+                <div class="content" >
+                    FREE delivery<br>
+                    Free delivery across all the products.
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="content" style="width:20vh;">
+                    <img src="static\img\benefit\fast_delivery.jpg" alt="not found" height="55vh" width="55vh">
+                </div>
+                <div class="content" >
+                    Fast delivery<br>
+                    One-Day and Two-Day Delivery on eligible items. 
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="content" style="width:20vh;">
+                    <img src="static\img\benefit\dicount.jpg" alt="not found" height="55vh" width="55vh">
+                </div>
+                <div class="content" >
+                    Get best deal<br>
+                    Get 5% - 10% dicount on selected items. 
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="content" style="width:20vh;">
+                    <img src="static\img\benefit\free_delivery.jpg" alt="not found" height="55vh" width="55vh">
+                </div>
+                <div class="content" >
+                    FREE delivery<br>
+                    Unlimited free One-Day and Two-Day Delivery on eligible items 
+                </div>
+            </div>
+        </div>
+
+        
+    </aside>
+
+</body>
+</html>

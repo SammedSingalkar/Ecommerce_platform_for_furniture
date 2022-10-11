@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orders</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <style>
+         section{
+            margin-left:20vh;
+            margin-right: 20vh;
+            margin-top: 2vh;
+         }
+        .upper{
+            padding:1vh;
+            width: 150vh;
+            border:1px solid grey;
+            background-color: whitesmoke;
+            border-radius: 7px;
+        }
+        .lower{
+            width: 150vh;
+            border: 1px solid grey;
+            height: 27vh;
+            border-radius: 7px;
+
+        }
+        .content{
+            /* width:30vh;
+            height: 10vh;
+            border:2px solid grey;
+            border-radius: 5px; */
+            padding-right: 5vh;
+            display:inline-block;
+        }
+
+        .under{
+            padding: 2vh;
+            display:inline-block;
+
+        }
+
+        .under button {
+            width: 22vh;
+            height: 4vh;
+            margin-bottom: 1vh;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid grey;
+        }
+
+        .under button:hover{
+            background-color: whitesmoke;
+        }
+
+    </style>
+
+</head>
+<body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/" >Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/logout">Sign in</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    {% for item in data %}
+    <section>
+        <div class="upper">
+            <div class="content">
+                Order Date
+                   <h5>{{item.order_date.strftime('%d-%m-%y')}}</h5>
+            </div>
+            <div class="content">
+                Total
+                <h5>₹{{item.amount}}</h5>
+                
+            </div>
+            <div class="content">
+                Ship to
+                <h5>Sammed Singalkar</h5>
+            </div>
+        
+        <div class="content">
+            Order #{{item.order_no}} 
+            <form action="/orders" method="post">
+            <h5><a href="">View Order Details</a> | <a href="/invoice{{item.order_no}}">Invoice</a></h5>
+        </form> 
+        </div>
+    </div>
+
+        <div class="lower">
+        <div class="under" style="width:20vh;">
+            <img src="static\img\product\srno/{{item.srno}}.jpg" alt="">
+        </div>
+        <div class="under" style="width:100vh">
+            {{item.product_name}}
+            <br> <h4>Quantity - {{item.quantity}}</h4>
+            <a href="/product_detail{{item.srno}}"><button style="padding:1vh; background-color:yellow; border:none; border-radius:5px; cursor:pointer;">Buy It Again</button></a>
+        </div>
+
+        <div class="under">
+            <button>Track Package</button><br>
+            <a href="/return"><button>Return Items</button></a><br>
+            <button>Share Reciept</button><br>
+            <button>Write Feedback</button><br>
+        </div>
+        </div>
+    </section>
+    {% endfor %}
+</body>
+</html>

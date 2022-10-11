@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<link rel="icon" type="image/png" href="static/img/logo.png">
+    <title>invoice order receipt </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="row">
+    				<!-- BEGIN INVOICE -->
+					<div class="col-xs-12">
+						<div class="grid invoice">
+							<div class="grid-body">
+								<div class="invoice-title">
+									<div class="row">
+										<!-- <div class="col-xs-12">
+											<img src="http://vergo-kertas.herokuapp.com/assets/img/logo.png" alt="" height="35">
+										</div> -->
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-xs-12">
+											<h2>invoice<br>
+											<span class="small">order #{{data.order_no}}</span></h2>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-xs-6">
+										<address>
+											<strong>Billed To:</strong><br>
+											{{data1.name}}<br>
+											{{data2.Landmark}}<br>
+											{{data2.city}}, {{data.pincode}}<br>
+											<abbr title="Phone">P:</abbr> {{data2.mobile_number}}
+										</address>
+									</div>
+									<div class="col-xs-6 text-right">
+										<address>
+											<strong>Shipped To:</strong><br>
+											{{data2.name}}<br>
+											{{data2.Landmark}}<br>
+											{{data2.city}}, {{data.pincode}}<br>
+											<abbr title="Phone">P:</abbr> {{data2.mobile_number}}
+										</address>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-6">
+										<address>
+											<strong>Payment Method:</strong><br>
+											<!-- Visa ending **** 1234<br> -->
+											{{data.payment_method}}<br>
+											{{data.email}}<br>
+										</address>
+									</div>
+									<div class="col-xs-6 text-right">
+										<address>
+											<strong>Order Date:</strong><br>
+											{{data.order_date}}
+										</address>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h3>ORDER SUMMARY</h3>
+										<table class="table table-striped">
+											<thead>
+												<tr class="line">
+													<td><strong>#</strong></td>
+													<td class="text-center"><strong>Product</strong></td>
+													<td class="text-center"><strong>Quantity</strong></td>
+													<td class="text-right"><strong>price</strong></td>
+													<td class="text-right"><strong>SUBTOTAL</strong></td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>1</td>
+													<td><strong>{{data.product_name}}</strong><br>something to put here</td>
+													<td class="text-center">{{data.quantity}}</td>
+													<td class="text-center">₹{{data.amount}}</td>
+													<td class="text-right">₹{{data.quantity * data.amount}}</td>
+												</tr>
+											
+												<tr>
+													<td colspan="3">
+													</td><td class="text-right"><strong>Total</strong></td>
+													<td class="text-right"><strong>₹{{data.quantity * data.amount}}</strong></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>									
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END INVOICE -->
+					<!-- <td class="text-right"><strong href="{{download}}">download</strong></td> -->
+				</div>
+</div>
+
+<style type="text/css">
+body{margin-top:20px;
+background:#eee;
+}
+
+.invoice {
+    padding: 30px;
+}
+
+.invoice h2 {
+	margin-top: 0px;
+	line-height: 0.8em;
+}
+
+.invoice .small {
+	font-weight: 300;
+}
+
+.invoice hr {
+	margin-top: 10px;
+	border-color: #ddd;
+}
+
+.invoice .table tr.line {
+	border-bottom: 1px solid #ccc;
+}
+
+.invoice .table td {
+	border: none;
+}
+
+.invoice .identity {
+	margin-top: 10px;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.invoice .identity strong {
+	font-weight: 600;
+}
+
+
+.grid {
+    position: relative;
+	width: 100%;
+	background: #fff;
+	color: #666666;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Ecommerce Platform for funiture.iml" filepath="$PROJECT_DIR$/.idea/Ecommerce Platform for funiture.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/.idea/PycharmProjects.iml" filepath="$USER_HOME$/PycharmProjects/.idea/PycharmProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../client_server_connectivity/.idea/client_server_connectivity.iml" filepath="$PROJECT_DIR$/../client_server_connectivity/.idea/client_server_connectivity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Data/Visual studio code/Python/leetcode/.idea/leetcode.iml" filepath="$PROJECT_DIR$/../Data/Visual studio code/Python/leetcode/.idea/leetcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Data/Visual studio code/Python/opps/.idea/opps.iml" filepath="$PROJECT_DIR$/../Data/Visual studio code/Python/opps/.idea/opps.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/python_practise/.idea/python_practise.iml" filepath="$USER_HOME$/PycharmProjects/python_practise/.idea/python_practise.iml" />
+    </modules>
+  </component>
+</project>

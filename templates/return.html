@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E-commerce furniture</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <style>
+        .cont{
+            margin:10vh;
+            padding:10vh;
+            font-size: x-large;
+        }
+        .button{
+            width:90px;
+            height: 50px;
+            color:black;
+            background-color: blue;
+            border-radius: 5px;
+        }
+        .button:hover{
+                 color:white;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static/unnamed.webp" alt="" width="43px"
+                            height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/login">Sign in</a>
+                            <a href="/seller_login">Seller Login</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <div class="cont">
+    <h>Why do you want to Return this product</h>
+    <form action="/return" method="post">
+        <input type="checkbox" name="p1" value="1">
+        <label for="p1">Selected wrong product</label><br>
+        <input type="checkbox" name="p2" value="2">
+        <label for="p2">Wrong Quantity Selected</label><br>
+        <input type="checkbox" name="p3" value="3">
+        <label for="p3">Mistakenly purchased</label><br>
+        <input type="checkbox" name="p4" value="4">
+        <label for="p4">other</label><br><br>
+        <button class="button"type="hide" name="return" value="r">Return</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel = "icon" type = "image/png" href = "static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <title>E-commerce furniture</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+
+    <style>
+        .detail{
+            display:inline-block;
+        }
+
+        .pro h2{
+            font-size: medium;
+            margin: .5vh;
+            padding: .5vh;
+        }
+
+        .cart{
+            display:inline-block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row" style="margin-left:15vh;">
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="row">
+                            <div class="col-sm-6" style="display:inline-block; border: 2px solid black;">
+                                <div class="product-images" style="margin-left:10vh; height: 70vh;">
+                                    <div class="product-main-img">
+                                        <img src="static\img\product\srno\{{data.srno}}.jpg" alt="" style="height:70vh; width:max-content">
+                                    </div>
+                                    <!-- <div class="product-gallery">
+                                        <img src="img/product-thumb-1.jpg" alt="">
+                                        <img src="img/product-thumb-2.jpg" alt="">
+                                        <img src="img/product-thumb-3.jpg" alt="">
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="display:inline-block;">
+                                <div class="product-inner" style="margin-left:5vh; width:70vh">
+                                    <h2 class="product-name">{{data.name}}</h2>
+                                    <div class="product-inner-price">
+                                         <del style="font-size:large">M.R.P ₹{{data.original_price}}</del><br>
+                                         <ins class="detail" style="font-size:xx-large; color:red; font-weight:300">₹{{data.price}}</ins>
+                                         <a class="detail" style="font-size: x-large; text-decoration: none; cursor:default;">({{(((data.original_price-data.price)/data.original_price)*100)|int}}% off)</a>
+                                         <br><a style="font-size:large; color:black; text-decoration: none; cursor:default;">You save ₹{{data.original_price - data.price}}</a>
+                                    </div>     
+                                        <div class="quantity">
+                                            <form action="/product_detail{{data.srno}}" class="cart" method="post">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty" value=1 name="quantity" min="1" step="1">&nbsp; &nbsp; 
+                                            <input class = "add_to_cart_button"  name="buynow" type="submit" value="Buy Now"/>
+                                            </form>
+                                        </div>
+
+                                        <form action="/product_detail{{data.srno}}" class="cart" method="post">
+                                        <input  class = "add_to_cart_button"  name="cart" type = "submit" value = "Add to cart" />
+                                       </form>
+
+                                    <form action="/product_detail{{data.srno}}" class="cart"method="post">
+                                        <input  class = "add_to_wislist"  name="wishlist" type = "submit" value = "Add to Wishlist" />
+                                    </form>
+                                    
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="pro">
+                                                <h2>Type - {{data.type}}</h2>
+                                                <h2>Brand - {{data.brand}}</h2>
+                                                <h2>Color - {{data.color}}</h2>
+                                                <h2>Style - {{data.style}}</h2>
+                                                <h2>Room Type - {{data.Room_type}}</h2>
+                                                <h2>Fabric Type - {{data.fabric_type}}</h2>
+                                                <h2>Seating Capacity - {{data.seating_capacity}}</h2>
+                                                <h2>shape - {{data.shape}}</h2>
+                                                <h2>Frame Material - {{data.frame_material}}</h2>
+                                                <h2>Special Feature - {{data.special_feature}}</h2><br><hr>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                
+                                                <h2>Product Description</h2><br> 
+                                                {{data.about}}
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="profile">
+                                                <h2>Reviews</h2>
+                                                <div class="submit-review">
+                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
+                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                    <div class="rating-chooser">
+                                                        <p>Your rating</p>
+
+                                                        <div class="rating-wrap-post">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                    <p><input type="submit" value="Submit"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-gray-600 body-font">
+        <div
+            class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <img src="static/img/logo.png" width="50" height="15" class="logo" alt="logo">
+                    </svg>
+                    <span class="ml-3 text-xl">Ecommerce Platform</span>
+                </a>
+                <p class="mt-2 text-sm text-gray-500"><h2>This is ecommerce platform for furniture. You can cuy quality of
+                    furniture here.</h2></p>
+            </div>
+            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"><h1>Contact</h1></h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Address:</strong>WIT Boys Hostel, Solpaur</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Phone:</strong>+1111111/+91 4444435</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Hours:</strong>10:00-18:00, Mon-Sat</p>
+                            </a>
+                        </li>
+                    </nav>
+                </div>
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"><h1>About</h1></h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/about">About us</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="">Delivery Information</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/contact">Contact Us</a>
+                        </li>
+                    </nav>
+                </div>
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"><h1>Account</h1></h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/login">Sign In</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/cart">View Cart</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/wishlist">My Wishlist</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">help</a>
+                        </li>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-gray-100">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 Ecommerce Platform —
+                    <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1"
+                        target="_blank">@knyttneve</a>
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+    </body>
+</html>

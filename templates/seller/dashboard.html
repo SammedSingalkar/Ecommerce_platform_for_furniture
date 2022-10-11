@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .outside{
+            margin-left: 25vh;
+            margin-right: 25vh;
+            margin-top: 12vh;
+            /* border: 2px solid black; */
+            height: 50vh;
+        }
+    
+        .inside{
+            margin-top: 4vh;
+            margin-left: 6vh;
+            margin-right: 6vh;
+            width:37vh;
+            height: 12vh;
+            border: 1px solid grey;
+            border-radius: 5px;
+            display:inline-block;
+    
+        }
+    
+        .inside:hover{
+            cursor: pointer;
+        }
+    
+        .line{
+            padding: 2vh;
+            display: inline-flex;
+            text-align:center;
+            position: relative;
+        }
+    
+        .line h2{
+            margin-top: -2vh;
+      margin-left: 5vh;
+      transform: translate(-40%, -70%);
+        }
+    
+        .content h1{
+            font-size:small;
+            transform: translate(30%, -120%);
+        }
+    </style>
+   
+</head>
+<body class="bg-white font-family-karla h-screen">
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/add_products">Add product</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static/unnamed.webp" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/seller_dashboard">Your Account</a>
+                            <a href="/seller_orders">Your orders</a>
+                            <a href="seller/logout">Logout</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <a href="/seller_orders"> <div class="outside">
+             <div class="inside">
+              <div class="line">
+                 <img src="static/img/Your-order.png" height="60px" width="60px" alt="">
+              </div>
+              <div class="line">
+                <h2>Your Orders</h2>     
+         </div>
+         <div class="content">
+             <h1>See which orders you got</h1>   
+         </div>
+             </div></a>
+ 
+            <a href="/seller_profile"> <div class="inside" >
+                 <div class="line">
+                     <img src="static/img/login.png" height="60px" width="60px" alt="">
+                  </div>
+                  <div class="line">
+                    <h2>Login </h2>    
+             </div>
+             <div class="content">
+                 <h1>Edit login, name and mobile</h1>   
+             </div>
+             </div></a>
+ 
+             <a href="/addresses"><div class="inside">
+                 <div class="line">
+                     <img src="static/img/location.png" height="60px" width="60px" alt="">
+                  </div>
+                  <div class="line">
+                    <h2>Your Address</h2>        
+             </div>
+             <div class="content">
+                 <h1>Edit address for orders </h1>   
+             </div>
+             </div></a>
+             
+             <a href=""><div class="inside">
+                 <div class="line">
+                     <img src="static/img/payment.png" height="60px" width="60px" alt="">
+                  </div>
+                  <div class="line">
+                    <h2>Payment Detail</h2>      
+             </div>
+             <div class="content">
+                 <h1>Edit or add bank details</h1>   
+             </div>
+             </div></a>
+    
+            <a href="/contact"> <div class="inside">
+                 <div class="line">
+                     <img src="static/img/contact.png" height="60px" width="60px" alt="">
+                  </div>
+                  <div class="line">
+                 <h2>Contact Us</h2>       
+             </div>
+             <div class="content">
+                 <h1>Contact us for more details</h1>   
+             </div>
+             </div></a>
+
+             <a href="/seller_product"> <div class="inside">
+                <div class="line">
+                    <img src="static/img/dashboard/edit.png" height="60px" width="60px" alt="">
+                 </div>
+                 <div class="line">
+                   <h2>Edit Details</h2>        
+            </div>
+            <div class="content">
+                <h1>edit and delete product </h1>   
+            </div>
+            </div></a>
+         
+         </div>
+     </section>
+
+     <section>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+                   <div class="col" style="margin-left:15vh; margin-right:5vh; width:37vh; display:inline-block;">
+                     <div class="card radius-10 border-start border-0 border-3 border-info" style="padding-left:3vh; padding-top: 1vh;" >
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="mb-0 text-secondary" style="font-size:large">Total Orders</p>
+                                    <h4 class="my-1 text-info" style="font-size:xx-large; color:red;">{{orders}}</h4>
+                                    <p class="mb-0 font-13">+2.5% from last week</p>
+                                </div>
+                                <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa fa-shopping-cart"><img src="static\img\dashboard\cart.png" alt="" style="height:5vh; width:5vh;"></i>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                   </div>
+
+                   <div class="col" style="margin-right:5vh; width:37vh; display:inline-block;">
+                    <div class="card radius-10 border-start border-0 border-3 border-danger" style="padding-left:3vh; padding-top: 1vh;">
+                       <div class="card-body">
+                           <div class="d-flex align-items-center">
+                               <div>
+                                   <p class="mb-0 text-secondary" style="font-size:large">Total Revenue</p>
+                                   
+                                   <h4 class="my-1 text-danger" style="font-size:xx-large; color:red;">₹{{revenue}}</h4>
+                                   <p class="mb-0 font-13">+5.4% from last week</p>
+                               </div>
+                               <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa fa-dollar"><img src="static\img\dashboard\rupee.png" alt="" style="height:5vh; width:5vh;"></i>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                  </div>
+
+                  <div class="col" style="margin-right:5vh; width:37vh; display:inline-block;">
+                    <div class="card radius-10 border-start border-0 border-3 border-success" style="padding-left:3vh; padding-top: 1vh;">
+                       <div class="card-body">
+                           <div class="d-flex align-items-center">
+                               <div>
+                                   <p class="mb-0 text-secondary" style="font-size:large">Total Quantity Sold</p>
+                                   <h4 class="my-1 text-success" style="font-size:xx-large; color:red;">{{quantity}}</h4>
+                                   <p class="mb-0 font-13">-4.5% from last week</p>
+                               </div>
+                               <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fa fa-bar-chart"><img src="static\img\dashboard\quantity.png" alt="" style="height:5vh; width:5vh;"></i>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col" style="margin-right:5vh; width:37vh; display:inline-block;">
+                    <div class="card radius-10 border-start border-0 border-3 border-warning" style="padding-left:3vh; padding-top: 1vh;">
+                       <div class="card-body">
+                           <div class="d-flex align-items-center">
+                               <div>
+                                   <p class="mb-0 text-secondary" style="font-size:large">Total Customers</p>
+                                   <h4 class="my-1 text-warning" style="font-size:xx-large; color:red;">{{customer}}</h4>
+                                   <p class="mb-0 font-13">+8.4% from last week</p>
+                               </div>
+                               <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class="fa fa-users"><img src="static\img\dashboard\customer.png" alt="" style="height:5vh; width:5vh;"></i>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                  </div> 
+                </div>
+            </div>
+     </section>
+
+     <style type="text/css">
+        body{
+        /* margin-top:20px; */
+        background-color: #f7f7ff;
+        }
+        .radius-10 {
+            border-radius: 10px !important;
+        }
+        
+        .border-info {
+            border-left: 5px solid  #0dcaf0 !important;
+        }
+        .border-danger {
+            border-left: 5px solid  #fd3550 !important;
+        }
+        .border-success {
+            border-left: 5px solid  #15ca20 !important;
+        }
+        .border-warning {
+            border-left: 5px solid  #ffc107 !important;
+        }
+        
+        
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+        }
+        .bg-gradient-scooter {
+            background: #17ead9;
+            background: -webkit-linear-gradient( 
+        45deg
+         , #17ead9, #6078ea)!important;
+            background: linear-gradient( 
+        45deg
+         , #17ead9, #6078ea)!important;
+        }
+        .widgets-icons-2 {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ededed;
+            font-size: 27px;
+            border-radius: 10px;
+        }
+        .rounded-circle {
+            border-radius: 50%!important;
+        }
+        .text-white {
+            color: #fff!important;
+        }
+        .ms-auto {
+            margin-left: auto!important;
+        }
+        .bg-gradient-bloody {
+            background: #f54ea2;
+            background: -webkit-linear-gradient( 
+        45deg
+         , #f54ea2, #ff7676)!important;
+            background: linear-gradient( 
+        45deg
+         , #f54ea2, #ff7676)!important;
+        }
+        
+        .bg-gradient-ohhappiness {
+            background: #00b09b;
+            background: -webkit-linear-gradient( 
+        45deg
+         , #00b09b, #96c93d)!important;
+            background: linear-gradient( 
+        45deg
+         , #00b09b, #96c93d)!important;
+        }
+        
+        .bg-gradient-blooker {
+            background: #ffdf40;
+            background: -webkit-linear-gradient( 
+        45deg
+         , #ffdf40, #ff8359)!important;
+            background: linear-gradient( 
+        45deg
+         , #ffdf40, #ff8359)!important;
+        }
+        </style>
+        
+        <script type="text/javascript">
+        
+        </script>
+</body>
+</html>

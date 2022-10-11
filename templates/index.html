@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E-commerce furniture</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+
+    <style>
+        .work-sans {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        #menu-toggle:checked+#menu {
+            display: block;
+        }
+
+        .hover\:grow {
+            transition: all 0.3s;
+            transform: scale(1);
+        }
+
+        .hover\:grow:hover {
+            transform: scale(1.02);
+        }
+
+        .carousel-open:checked+.carousel-item {
+            position: static;
+            opacity: 100;
+        }
+
+        .carousel-item {
+            -webkit-transition: opacity 0.6s ease-out;
+            transition: opacity 0.6s ease-out;
+        }
+
+        #carousel-1:checked~.control-1,
+        #carousel-2:checked~.control-2,
+        #carousel-3:checked~.control-3 {
+            display: block;
+        }
+
+        .carousel-indicators {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            bottom: 2%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+            color: #000;
+            /*Set to match the Tailwind colour you want the active one to be */
+        }
+
+        .pro {
+            display: inline-block;
+        }
+
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .widget.single-news {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .widget.single-news .image img {
+            display: block;
+            width: 100%;
+        }
+
+        .widget.single-news .image .gradient {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0d…IxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjbGVzc2hhdC1nZW5lcmF0ZWQpIiAvPjwvc3ZnPg==);
+            background-image: -webkit-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+            background-image: -moz-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+            background-image: -o-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+            background-image: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+        }
+
+        .widget.single-news .details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+        }
+
+        .widget.single-news .details .category {
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .widget.single-news .details .category a {
+            color: #fff;
+            zoom: 1;
+            -webkit-opacity: 0.5;
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            filter: alpha(opacity=50);
+        }
+
+        .widget.single-news .details h3 {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .widget.single-news .details h3 a {
+            color: #fff;
+            zoom: 1;
+            -webkit-opacity: 0.8;
+            -moz-opacity: 0.8;
+            opacity: 0.8;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+            filter: alpha(opacity=80);
+        }
+
+        .widget.single-news .details:hover time {
+            position: relative;
+            display: block;
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: -20px;
+            -webkit-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            -moz-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            -o-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            zoom: 1;
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            filter: alpha(opacity=0);
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px"
+                            height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/login">Sign in</a>
+                            <a href="/seller_login">Seller Login</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <aside class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
+
+
+        <div class="carousel relative container mx-auto" style="max-width:1600px;">
+            <div class="carousel-inner relative overflow-hidden w-full">
+                <!--Slide 1-->
+                <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
+                    checked="checked">
+                <div class="carousel-item absolute opacity-0" style="height:50vh;">
+                    <!-- <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');"> -->
+                    <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+                        style="background-image: url(static/img/couch.jpg); color:white;">
+
+                        <div class="container mx-auto">
+                            <div
+                                class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                                <p class="text-black text-2xl my-4" style="color:white;">Get the best couch here</p>
+                                <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
+                                    href="/product">view product</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <label for="carousel-3"
+                    class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-2"
+                    class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+                <!--Slide 2-->
+                <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+                <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:50vh;">
+                    <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+                        style="background-image: url('https://i.ytimg.com/vi/0rmIMELFNx8/maxresdefault.jpg');">
+
+                        <div class="container mx-auto">
+                            <div
+                                class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                                <p class="text-black text-2xl my-4">Good teapoy</p>
+                                <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
+                                    href="#">view product</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <label for="carousel-1"
+                    class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-3"
+                    class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+                <!--Slide 3-->
+                <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                <div class="carousel-item absolute opacity-0" style="height:50vh;">
+                    <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom"
+                        style="background-image: url('/static/img/bed.jpg'); color:white;">
+
+                        <div class="container mx-auto">
+                            <div
+                                class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                                <p class="text-black text-2xl my-4" style="color:white;">Get the best bed here</p>
+                                <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
+                                    href="#">view product</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <label for="carousel-2"
+                    class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-1"
+                    class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+                <!-- Add additional indicators for each slide-->
+                <ol class="carousel-indicators">
+                    <li class="inline-block mr-3">
+                        <label for="carousel-1"
+                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                    </li>
+                    <li class="inline-block mr-3">
+                        <label for="carousel-2"
+                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                    </li>
+                    <li class="inline-block mr-3">
+                        <label for="carousel-3"
+                            class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </aside>
+
+    <section>
+        <div class="promo-area">
+            <div class="zigzag-bottom"></div>
+            <div class="container">
+                <div class="row" style="margin-left:25vh">
+                    <div class="col-md-3 col-sm-6" style="display: inline-block; margin-left: 3vh; margin-right: 3vh;">
+                        <div class="single-promo promo1" style="width:32vh">
+                            <i class="fa fa-refresh"></i>
+                            <p>30 Days return</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6" style="display: inline-block; margin-left: 3vh; margin-right: 3vh;">
+                        <div class="single-promo promo2" style="width:32vh">
+                            <i class="fa fa-truck"></i>
+                            <p>Free shipping above ₹500</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6" style="display: inline-block; margin-left: 3vh; margin-right: 3vh;">
+                        <div class="single-promo promo3" style="width:32vh">
+                            <i class="fa fa-lock"></i>
+                            <p>Secure payments</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6" style="display: inline-block; margin-left: 3vh; margin-right: 3vh;">
+                        <div class="single-promo promo4" style="width:32vh">
+                            <i class="fa fa-gift"></i>
+                            <p>New products</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End promo area -->
+    </section>
+
+
+    <section>
+        <div class="contain" style="margin-left:30vh;">
+            <form action="/product" method="post">
+                <button name="couch" value="couch" type="hide"><a href="/product">
+                        <div class="col-sm-4" style="margin-right:8vh; width:40vh; height:40vh; display:inline-block;">
+                            <div class="widget single-news">
+                                <div class="image">
+                                    <img src="static/img/products/sofa.jpg" style="width: 300px; height:195px"
+                                        class="img-responsive">
+                                    <span class="gradient"></span>
+                                </div>
+                                <div class="details">
+                                    <center>
+                                        <h3>couch</h3>
+                                    </center>
+                                    <time></time>
+                                </div>
+                            </div>
+                        </div>
+                    </a></button>
+
+                <button name="teapoy" value="teapoy" type="hide"><a href="/product">
+                        <div class="col-sm-4" style="margin-right:8vh;width:40vh; height:40vh; display:inline-block;">
+                            <div class="widget single-news">
+                                <div class="image">
+                                    <img src="static/img/products/teapoy.jpg" style="width: 300px; height:195px"
+                                        class="img-responsive">
+                                    <span class="gradient"></span>
+                                </div>
+                                <div class="details">
+                                    <center>
+                                        <h3>Teapoy</h3>
+                                    </center>
+                                    <time></time>
+                                </div>
+                            </div>
+                        </div>
+                    </a></button>
+
+               <button name="bed" value="bed" type="hide"><a href="/product">
+                <div class="col-sm-4" style="margin-right:8vh; width:40vh; height:40vh; display:inline-block;">
+                    <div class="widget single-news">
+                        <div class="image">
+                            <img src="static/img/products/bed.jpg" style="width: 300px; height:195px"
+                                class="img-responsive">
+                            <span class="gradient"></span>
+                        </div>
+                        <div class="details">
+                            <center>
+                                <h3>Bed</h3>
+                            </center>
+                            <time></time>
+                        </div>
+                    </div>
+                </div>
+            </a></button>
+
+            <button name="dressing" value="dressing table" type="hide"><a href="/product">
+                <div class="col-sm-4"
+                    style="margin-right:8vh; width:40vh; height:40vh; display:inline-block; margin-top: -6vh;">
+                    <div class="widget single-news">
+                        <div class="image">
+                            <img src="static/img/products/dressing_table.jpg" style="width: 300px; height:195px"
+                                class="img-responsive">
+                            <span class="gradient"></span>
+                        </div>
+                        <div class="details">
+                            <center>
+                                <h3>Dressing Table</h3>
+                            </center>
+                            <time></time>
+                        </div>
+                    </div>
+                </div>
+            </a></button>
+
+            <button name="dinning" value="dinning_table" type="hide"><a href="/product">
+                <div class="col-sm-4"
+                    style="margin-right:8vh; width:40vh; height:40vh; display:inline-block; margin-top: -6vh;">
+                    <div class="widget single-news">
+                        <div class="image">
+                            <img src="static/img/products/dinning_table.jpg" style="width: 300px; height:195px"
+                                class="img-responsive">
+                            <span class="gradient"></span>
+                        </div>
+                        <div class="details">
+                            <center>
+                                <h3>Dinning Table</h3>
+                            </center>
+                            <time></time>
+                        </div>
+                    </div>
+                </div>
+            </a></button>
+
+            <button name="cuboard" value="cuboard" type="hide"><a href="/product">
+                <div class="col-sm-4"
+                    style="margin-right:8vh; width:40vh; height:40vh; display:inline-block; margin-top: -6vh;">
+                    <div class="widget single-news">
+                        <div class="image">
+                            <img src="static/img/products/cuboard.jpg" style="width: 300px; height:195px"
+                                class="img-responsive">
+                            <span class="gradient"></span>
+                        </div>
+                        <div class="details">
+                            <center>
+                                <h3>Cuboard</h3>
+                            </center>
+                            <time></time>
+                        </div>
+                    </div>
+                </div>
+            </a></button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="text-gray-600 body-font">
+        <div
+            class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <img src="static/img/logo.png" width="50" height="15" class="logo" alt="logo">
+                    </svg>
+                    <span class="ml-3 text-xl">Ecommerce Platform</span>
+                </a>
+                <p class="mt-2 text-sm text-gray-500">This is ecommerce platform for furniture. You can cuy quality of
+                    furniture here.</p>
+            </div>
+            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Contact</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Address:</strong>WIT Boys Hostel, Solpaur</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Phone:</strong>+1111111/+91 4444435</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">
+                                <p><strong>Hours:</strong>10:00-18:00, Mon-Sat</p>
+                            </a>
+                        </li>
+                    </nav>
+                </div>
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">About</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/about">About us</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/addresses">Delivery Information</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/contact">Contact Us</a>
+                        </li>
+                    </nav>
+                </div>
+
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Account</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/login">Sign In</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/cart">View Cart</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/wishlist">My Wishlist</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">help</a>
+                        </li>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-gray-100">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 Ecommerce Platform —
+                    <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1"
+                        target="_blank">@ecommerce</a>
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

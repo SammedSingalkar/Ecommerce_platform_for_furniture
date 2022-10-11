@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addresses</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+
+    <style>
+    section{
+        margin-left:24vh;
+        margin-right:24vh;
+        margin-top: 4vh;
+    }
+    .container{
+        /* margin-top: 2vh; */
+       margin-left: 4vh;
+        padding:2vh;
+       width:45vh;
+       height: 30vh;
+       border:2px solid grey;
+       border-radius: 5px;
+       display: inline-block;
+    }
+
+    .container1{
+        /* margin-top: 15vh; */
+        padding-top: 15vh;
+       margin-left: 4vh;
+       width:45vh;
+       height: 30vh;
+       border:2px dotted grey;
+       border-radius: 5px;
+       display: inline-block;
+       font-size:xx-large;
+        text-align: center;
+    }
+
+
+    .container1 .sign span{
+        /* font-size: xx-large; */
+        /* margin-top: 10vh; */
+        color:grey;
+        display: inline-block;
+        font-weight:900;
+        text-align: center;
+
+    }
+
+    .edit_remove{
+        margin-top: 6vh;
+        display:inline-block;
+        cursor: pointer;
+        color: blue;
+    }
+
+    
+    .edit_remove:hover{
+                color:red;
+                text-decoration: underline;
+    } 
+
+    
+</style>
+</head>
+<body class="bg-white font-family-karla h-screen">
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px" height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/login/logout">Log Out</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+<h2 style="margin-left:30vh; font-size: xx-large; margin-top: 5vh; ">Your Addresses</h2>
+    <section>
+        {% for item in data %}
+        <form action="/addresses" method="post" style="display:inline-block;">
+        <div class="container" style="margin-bottom:3vh;">
+            <div class="name">{{item.name}}</div>
+            <div class="landmark">{{item.Landmark}}</div>
+            <div class="city">{{item.city}}, {{item.state}}, {{item.pincode}}</div>
+            <div class="country">India</div>
+            <div class="mobile">{{item.mobile_number}}</div>
+       
+            
+            <div class="edit_remove">
+                <div class="edit"> 
+                    <a href="/edit_address{{item.srno}}"> Edit </a></div>
+                <div class="space"></div>
+            </div>
+            <div class="edit_remove">
+                <div class="edit"> 
+                    &nbsp; |&nbsp;</div>
+                <div class="space"></div>
+            </div>
+            <div class="edit_remove" >
+                <button type="hide" class="remove" name="remove" value="{{item.srno}}">Remove</button>
+                <!-- <input type="submit" class="remove" name="remove" value="Remove" style="background-color:white;"> -->
+                <!-- <input type="hidden" class="remove" name="sr" value="{{item.srno}}" style="background-color:white;"> -->
+            </div>
+        </div>
+    </form>
+        {% endfor %}
+        
+
+        <a href="/add_address"><div class="container1" >
+           Add Address
+           <div class="sign"><span>&#43;</span></div>
+        </div> </a>
+    </section>
+    
+    </body>
+</html>

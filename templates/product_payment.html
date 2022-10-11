@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/img/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact info</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <header id="header">
+        <a><img src="static/img/logo.png" width="100" height="25" class="logo" alt="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <a>
+                    <div class="dropdown">
+                        <img class="dropbtn" style="border-radius: 21px;" src="static\img\profile\{{img}}.jpg" alt="" width="43px"
+                            height="42px">
+                        <div class="dropdown-content">
+                            <a href="/dashboard">Your Account</a>
+                            <a href="/orders">Your orders</a>
+                            <a href="/wishlist">Your Wishlist</a>
+                            <a href="/logout">Sign in</a>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <div class="container">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                {% for item in data %}
+                <div class="row">
+                    <div class="col-md-4" >
+                        <form action="/product_payment" method="post">
+                            <button type="hide" name="card" value="{{item.srno}}" >
+                                <div class="payment-card">
+                                    <img src="static\img\pay\{{item.company}}.png" alt="" width="75vh" height="62vh">
+                                    <h2>
+                                        
+                                        {% set number = item.card_number | string() %}
+                                        **** **** **** {{number[12:16]}}
+                                    </h2>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <small>
+                                                <strong>Expiry date:</strong> {{item.expiry.strftime('%m-%d')}}
+                                            </small>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <small>
+                                                <strong>Name:</strong> {{item.card_holder}}
+                                            </small>
+
+                                        </div>
+                                    </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- </div> -->
+
+
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                Payment method
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="panel-group payments-method" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <img src="static\img\pay\upi.png" alt="" width="70vh" height="60">
+                                            </div>
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                    href="#collapseOne">UPI</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse">
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <h2>Summary</h2>
+                                                        {% for item in data1 %}
+                                                        <strong>Product:</strong> {{item.product_name}} x {{item.quantity}}<br>
+                                                        <strong>price:</strong> {{item.price}} <br>
+
+                                                        <strong>Total:</strong> <span class="text-navy">₹{{item.quantity * item.price}}</span><br>
+                                                            {% endfor %}
+
+                                                           <br> <strong>Grand Total: ₹{{total}}</strong>
+
+                                                        <input type="text" name="upi" id="upi"
+                                                            placeholder="Enter Put Your upi Id" required>
+                                                        &nbsp;&nbsp;<button class="btn btn-primary" type="submit">Make a
+                                                            payment!</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <i class="fa fa-cc-amex text-success"></i>
+                                                <i class="fa fa-cc-mastercard text-warning"></i>
+                                                <i class="fa fa-cc-discover text-danger"></i>
+                                            </div>
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                    href="#collapseTwo">Credit/Debit Card </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h2>Summary</h2>
+                                                        {% for item in data1 %}
+                                                        <strong>Product:</strong> {{item.product_name}} x {{item.quantity}}<br>
+                                                        <strong>price:</strong> {{item.price}} <br>
+
+                                                        <strong>Total:</strong> <span class="text-navy">₹{{item.quantity * item.price}}</span><br>
+                                                            {% endfor %}
+
+                                                           <br> <strong>Grand Total: ₹{{total}}</strong>
+                              
+                                                    </div>
+                                                    <div class="col-md-8">
+
+                                                        <form role="form" id="payment-form">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <label>CARD NUMBER</label>
+                                                                        {% set number = detail.card_number | string() %}
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control"
+                                                                                value="{{number[:4]}}-{{number[4:8]}}-{{number[8:12]}}-{{number[12:16]}}"
+                                                                                name="Number"
+                                                                                placeholder="Valid Card Number"
+                                                                                required="">
+                                                                            <span class="input-group-addon"><i
+                                                                                    class="fa fa-credit-card"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-7 col-md-7">
+                                                                    <div class="form-group">
+                                                                        <label>EXPIRATION DATE</label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="{{detail.expiry.strftime('%m-%d')}}"
+                                                                            name="Expiry" placeholder="MM / YY"
+                                                                            required="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-5 col-md-5 pull-right">
+                                                                    <div class="form-group">
+                                                                        <label>CV CODE</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="CVC" placeholder="CVC" required="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <label>NAME OF CARD</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nameCard"
+                                                                            value="{{detail.card_holder}}"
+                                                                            placeholder="NAME AND SURNAME">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <button class="btn btn-primary" type="submit">Make a
+                                                                        payment!</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <img src="static\img\pay\cod.png" alt="" width="70vh" height="60">
+                                            </div>
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                    href="#collapsethree">COD/POD</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapsethree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                    <form action="/product_payment" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <h2>Summary</h2>
+                                                        {% for item in data1 %}
+                                                        <strong>Product:</strong> <input type="hidden" name="product" value="{{item.product_name}}" style="border:none; cursor:auto" readonly>{{item.product_name}} x {{item.quantity}}<br>
+                                                        <strong>price:</strong> {{item.price}} <br>
+                                                        <strong>Total:</strong> <span class="text-navy">₹{{item.quantity * item.price}}</span><br>
+                                                        {% endfor %}
+                                                        <strong>Grand Total:</strong> <span class="text-navy"> <input type="hidden" name="amount" value="{{total}}" style="border:none; cursor:auto" readonly>₹{{total}}</span>
+
+                                                        
+                                                
+
+                                                        &nbsp;&nbsp;<button class="btn btn-primary" name="order" value="confirm" type="hide">Confirm order</button>
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <style type="text/css">
+        body {
+            margin-top: 15px;
+            background: #eee;
+        }
+
+        /* WRAPPERS */
+        #wrapper {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            padding: 0 20px;
+        }
+
+        .wrapper-content {
+            padding: 20px 10px 40px;
+        }
+
+        #page-wrapper {
+            padding: 0 15px;
+            min-height: 568px;
+            position: relative !important;
+        }
+
+        @media (min-width: 768px) {
+            #page-wrapper {
+                position: inherit;
+                margin: 0 0 0 240px;
+                min-height: 2002px;
+            }
+        }
+
+        /* Payments */
+        .payment-card {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #e7eaec;
+        }
+
+        .payment-icon-big {
+            font-size: 60px;
+            color: #d1dade;
+        }
+
+        .payments-method.panel-group .panel+.panel {
+            margin-top: -1px;
+        }
+
+        .payments-method .panel-heading {
+            padding: 15px;
+        }
+
+        .payments-method .panel {
+            border-radius: 0;
+        }
+
+        .payments-method .panel-heading h5 {
+            margin-bottom: 5px;
+        }
+
+        .payments-method .panel-heading i {
+            font-size: 26px;
+        }
+
+        .payment-icon-big {
+            font-size: 60px !important;
+            color: #d1dade;
+        }
+
+        .form-control,
+        .single-line {
+            background-color: #FFFFFF;
+            background-image: none;
+            border: 1px solid #e5e6e7;
+            border-radius: 1px;
+            color: inherit;
+            display: block;
+            padding: 6px 12px;
+            transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .text-navy {
+            color: #1ab394;
+        }
+
+        .text-success {
+            color: #1c84c6;
+        }
+
+        .text-warning {
+            color: #f8ac59;
+        }
+
+        .ibox {
+            clear: both;
+            margin-bottom: 25px;
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .ibox.collapsed .ibox-content {
+            display: none;
+        }
+
+        .ibox.collapsed .fa.fa-chevron-up:before {
+            content: "\f078";
+        }
+
+        .ibox.collapsed .fa.fa-chevron-down:before {
+            content: "\f077";
+        }
+
+        .ibox:after,
+        .ibox:before {
+            display: table;
+        }
+
+        .ibox-title {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background-color: #ffffff;
+            border-color: #e7eaec;
+            border-image: none;
+            border-style: solid solid none;
+            border-width: 3px 0 0;
+            color: inherit;
+            margin-bottom: 0;
+            padding: 14px 15px 7px;
+            min-height: 48px;
+        }
+
+        .ibox-content {
+            background-color: #ffffff;
+            color: inherit;
+            padding: 15px 20px 20px 20px;
+            border-color: #e7eaec;
+            border-image: none;
+            border-style: solid solid none;
+            border-width: 1px 0;
+        }
+
+        .ibox-footer {
+            color: inherit;
+            border-top: 1px solid #e7eaec;
+            font-size: 90%;
+            background: #ffffff;
+            padding: 10px 15px;
+        }
+
+        .text-danger {
+            color: #ed5565;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>
