@@ -21,7 +21,7 @@ app.config.update(
     MAIL_PORT='465',
     MAIL_USE_SSL=True,
     MAIL_USERNAME='sammedsingalkar@gmail.com',
-    MAIL_PASSWORD='sbnsozocxqetsdoh'
+    MAIL_PASSWORD='yourmailapppass'
 )
 mail = Mail(app)
 mysql = MySQL(app)
